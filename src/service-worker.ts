@@ -78,3 +78,5 @@ self.addEventListener('message', (event) => {
 });
 
 // Any other custom service worker logic can go here.
+const swUrl = `${process.env.PUBLIC_URL}/sw.js`
+
