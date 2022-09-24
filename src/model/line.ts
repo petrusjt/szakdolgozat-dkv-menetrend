@@ -1,4 +1,3 @@
-import {List} from "postcss/lib/list";
 import {Stop} from "./stop";
 
 
