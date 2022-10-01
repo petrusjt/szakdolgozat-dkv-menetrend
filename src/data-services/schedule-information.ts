@@ -1,6 +1,7 @@
 import {Line} from "../model/schedule/line";
 import {Stop} from "../model/schedule/stop";
 import {Schedule} from "../model/schedule/schedule";
+import {StartTimes} from "../model/schedule/start-times";
 
 
 export function getScheduleForLine(lineIdentifier: string): Schedule {
@@ -13,6 +14,11 @@ export function getScheduleForLine(lineIdentifier: string): Schedule {
             new Stop("Borzán Gáspár utca", 32),
             new Stop("Wolaffka utca", 33),
             new Stop("Málna utca", 36),
+        ], [
+            new StartTimes(4, [32]),
+            new StartTimes(5, [16, 56]),
+            new StartTimes(6, [10, 56]),
+            new StartTimes(7, [10]),
         ]);
     } else if (lineIdentifier === "15Y") {
         return new Schedule(new Line("15Y"), [
@@ -23,7 +29,12 @@ export function getScheduleForLine(lineIdentifier: string): Schedule {
             new Stop("Borzán Gáspár utca", 32),
             new Stop("Lahner utca", 33),
             new Stop("Bayk András utca", 38),
+        ], [
+            new StartTimes(4, [58]),
+            new StartTimes(5, [38]),
+            new StartTimes(6, [40]),
+            new StartTimes(7, [40]),
         ]);
     }
-    return new Schedule(new Line("Error"), []);
+    return new Schedule(new Line("Error"), [], []);
 }

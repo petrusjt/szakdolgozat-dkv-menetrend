@@ -7,8 +7,8 @@ export class Stop {
     get name(): string {
         return this._name;
     }
-    private _name: string;
-    private _timeFromStart: number;
+    private readonly _name: string;
+    private readonly _timeFromStart: number;
 
     constructor(name: string, timeFromStart: number) {
         this._name = name;
