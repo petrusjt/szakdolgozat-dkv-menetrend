@@ -1,24 +1,49 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './App.css';
-import {getScheduleForLine} from "./data-services/schedule-information";
-import {Stop} from "./model/schedule/stop";
+import {FormControl, InputLabel, ListSubheader, Menu, MenuItem, Select} from "@mui/material";
+import { ScheduleLister } from './ScheduleLister';
+import {LineSelectHelper} from "./util/line-select-helper";
 
 function App() {
-  return (
-    <div className="w-screen h-screen bg-gray-200 dark:bg-slate-800 dark:text-white flex flex-col justify-center items-center">
-        {["15", "15Y"].map(lineName =>
-            <div className="bg-white dark:bg-slate-600 mt-2 p-3 rounded-md">
-                <h1 className="font-bold">{lineName} megállók</h1>
-                {getScheduleForLine(lineName).stops.map((item: Stop) =>
-                    <div key={item.name} className="flex w-48 justify-between">
-                        <div>{item.name}</div>
-                        <div>{item.timeFromStart}</div>
-                    </div>
-                )}
+    const [selectedLine, setSelectedLine] = useState()
+
+    const handleLineSelect = (event: any) => {
+        setSelectedLine(event.target.value)
+    }
+
+    const selectLineList = LineSelectHelper.getLineSelectList()
+
+    return (
+        <div className="w-screen h-screen bg-gray-200 dark:bg-slate-800 p-2
+                    dark:text-white flex flex-col justify-center items-center">
+            <div className="card w-full">
+                <FormControl className="w-full">
+                    <InputLabel id="lineLabel" className="dark:!text-white">Járat</InputLabel>
+                    <Select labelId="lineLabel"
+                            label="Járat"
+                            className="dark:!text-white"
+                            onChange={handleLineSelect}>
+                        {
+                            selectLineList.map(item =>
+                                item.isCategory
+                                    ? <ListSubheader>{item.value}</ListSubheader>
+                                    : <MenuItem value={item.value}>{item.label}</MenuItem>
+                            )
+                        }
+                    </Select>
+                </FormControl>
+                {selectedLine
+                    ? <ScheduleLister selectedLine={selectedLine} />
+                    : ""}
             </div>
-        )}
-    </div>
-  );
+        </div>
+    );
 }
+
+/*
+{["15", "15Y"].map(lineName =>
+
+)}
+*/
 
 export default App;

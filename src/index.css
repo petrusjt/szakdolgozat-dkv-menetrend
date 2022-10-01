@@ -1,3 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.card {
+    @apply bg-white dark:bg-slate-600 rounded-md p-3 mt-2
+}
