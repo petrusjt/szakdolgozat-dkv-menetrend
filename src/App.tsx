@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import './App.css';
-import {FormControl, InputLabel, ListSubheader, Menu, MenuItem, Select} from "@mui/material";
+import {FormControl, InputLabel, ListSubheader, MenuItem, Select} from "@mui/material";
 import { ScheduleLister } from './ScheduleLister';
 import {LineSelectHelper} from "./util/line-select-helper";
 
