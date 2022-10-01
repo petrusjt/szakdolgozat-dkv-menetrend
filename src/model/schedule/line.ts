@@ -1,4 +1,3 @@
-import {Stop} from "./stop";
 
 
 export class Line {
