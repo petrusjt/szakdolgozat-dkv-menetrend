@@ -6,7 +6,6 @@ import {Stop} from "./model/stop";
 function App() {
   return (
     <div className="w-screen h-screen bg-green-600 flex flex-col justify-center items-center">
-        {process.env.MODE !== "PROD" ? <h1 className="text-4xl font-extrabold text-red-700">FEJLESZTŐI RENDSZER</h1> : ""}
         <h1 className="font-bold">15 megállók</h1>
         {getScheduleForLine("15").stops.map((item: Stop) => <div>{item.name}</div>)}
         <h1 className="font-bold">15Y megállók</h1>
