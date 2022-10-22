@@ -1,7 +1,6 @@
 import {FormControl, InputLabel, ListSubheader, MenuItem, Select} from "@mui/material";
-import {ScheduleLister} from "./ScheduleLister";
 import React from "react";
-import {LineSelectHelper} from "../../util/line-select-helper";
+import {LineSelectHelper} from "src/util/line-select-helper";
 import {useTranslation} from "react-i18next";
 import {getScheduleForLine} from "src/data-services/schedule-information";
 import {Stop} from "src/model/schedule/stop";

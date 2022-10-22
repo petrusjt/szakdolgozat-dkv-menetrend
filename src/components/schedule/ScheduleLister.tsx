@@ -1,6 +1,5 @@
 import {getScheduleForLine} from "../../data-services/schedule-information";
 import {Stop} from "../../model/schedule/stop";
-import {useTranslation} from "react-i18next";
 
 type Props = {
     selectedLine: number,

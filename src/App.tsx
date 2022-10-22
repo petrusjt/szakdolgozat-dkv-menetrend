@@ -1,11 +1,8 @@
 import React, {useState} from 'react';
 import './App.css';
-import {FormControl, InputLabel, ListSubheader, MenuItem, Select} from "@mui/material";
 import { ScheduleLister } from './components/schedule/ScheduleLister';
-import {LineSelectHelper} from "./util/line-select-helper";
 import {ScheduleSelector} from "./components/schedule/ScheduleSelector";
 import {baseChangeListener} from "src/util/ListenerUtils";
-import {Stop} from "src/model/schedule/stop";
 
 function App() {
     const [selectedLine, setSelectedLine] = useState(0)
