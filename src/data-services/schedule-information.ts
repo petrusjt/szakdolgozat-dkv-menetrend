@@ -19,7 +19,7 @@ export function getScheduleForLine(lineIdentifier: string): Schedule {
             new StartTimes(5, [16, 56]),
             new StartTimes(6, [10, 56]),
             new StartTimes(7, [10]),
-        ]);
+        ], new Stop("Doberdó utca", 0));
     } else if (lineIdentifier === "15Y") {
         return new Schedule(new Line("15Y"), [
             new Stop("Doberdó utca", 0),
@@ -34,7 +34,7 @@ export function getScheduleForLine(lineIdentifier: string): Schedule {
             new StartTimes(5, [38]),
             new StartTimes(6, [40]),
             new StartTimes(7, [40]),
-        ]);
+        ], new Stop("Doberdó utca", 0));
     }
-    return new Schedule(new Line("Error"), [], []);
+    return new Schedule(new Line("Error"), [], [], new Stop("Error", 0));
 }

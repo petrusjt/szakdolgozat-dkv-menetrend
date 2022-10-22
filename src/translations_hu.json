@@ -1,0 +1,6 @@
+{
+  "schedule.selector.line": "Járat",
+  "schedule.selector.startingPoint": "Felszállási megálló",
+  "lineGrouping.tram": "Villamos",
+  "lineGrouping.bus": "Busz"
+}

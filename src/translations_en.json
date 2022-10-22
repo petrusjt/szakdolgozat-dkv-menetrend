@@ -1,0 +1,6 @@
+{
+  "schedule.selector.line": "Line",
+  "schedule.selector.startingPoint": "Stop of boarding",
+  "lineGrouping.tram": "Tram",
+  "lineGrouping.bus": "Bus"
+}
