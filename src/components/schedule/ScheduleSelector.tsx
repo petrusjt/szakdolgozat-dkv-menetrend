@@ -12,6 +12,7 @@ type Props = {
 }
 
 export function ScheduleSelector(props: Props) {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { t, i18n } = useTranslation();
 
     const selectLineList = LineSelectHelper.getLineSelectList()
