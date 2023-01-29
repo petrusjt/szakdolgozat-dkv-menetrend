@@ -1,4 +1,3 @@
-import i18next from 'src/i18n'
 
 
 const LineGrouping = new Map([
