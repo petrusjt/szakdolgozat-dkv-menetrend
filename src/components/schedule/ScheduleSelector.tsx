@@ -19,7 +19,7 @@ export function ScheduleSelector(props: Props) {
     const schedule = getScheduleForLine("" + props.selectedLine)
     return (
         <div className="card w-full">
-            <FormControl className="w-full">
+            <FormControl className="w-full" size="small">
                 <InputLabel id="lineLabel"
                             className="dark:!text-white">
                     {t('schedule.selector.line').toString()}
@@ -36,7 +36,7 @@ export function ScheduleSelector(props: Props) {
                     }
                 </Select>
             </FormControl>
-            <FormControl className="w-full !mt-3">
+            <FormControl className="w-full !mt-3" size="small">
                 <InputLabel id="startingPointLabel"
                             className="dark:!text-white">
                     {t('schedule.selector.startingPoint').toString()}

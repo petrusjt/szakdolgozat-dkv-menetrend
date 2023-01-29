@@ -1,4 +1,10 @@
 {
+  "backToIndex": "Back to Home",
+  "theme": "Theme",
+  "theme.toggle": "Toggle light and dark theme",
+  "langSelect.language": "Language",
+  "langSelect.hungarian": "Magyar",
+  "langSelect.english": "English",
   "schedule.selector.line": "Line",
   "schedule.selector.startingPoint": "Stop of boarding",
   "lineGrouping.tram": "Tram",

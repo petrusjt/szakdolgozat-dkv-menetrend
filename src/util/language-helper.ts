@@ -1,3 +1,4 @@
+import i18next from "i18next";
 
 const PREFERRED_LANG_KEY = "preferred_lang"
 
@@ -10,4 +11,5 @@ export function getPreferredLanguage() {
 
 export function setPreferredLanguage(langCodeShort: string) {
     localStorage.setItem(PREFERRED_LANG_KEY, langCodeShort)
+    i18next.changeLanguage(langCodeShort)
 }

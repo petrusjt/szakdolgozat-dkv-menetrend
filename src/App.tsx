@@ -12,7 +12,7 @@ function App() {
     const handleStartingPointSelect = baseChangeListener(setStartingPoint)
 
     return (
-        <div className="w-screen h-screen bg-gray-200 dark:bg-slate-800 p-2
+        <div className="w-full h-full bg-gray-200 dark:bg-slate-800 p-2
                     dark:text-white flex flex-col justify-center items-center">
 
             <ScheduleSelector selectedLine={selectedLine}

@@ -1,4 +1,10 @@
 {
+  "backToIndex": "Vissza a Főoldalra",
+  "theme": "Téma",
+  "theme.toggle": "Váltás a világos és sötét téma között",
+  "langSelect.language": "Nyelv",
+  "langSelect.hungarian": "Magyar",
+  "langSelect.english": "English",
   "schedule.selector.line": "Járat",
   "schedule.selector.startingPoint": "Felszállási megálló",
   "lineGrouping.tram": "Villamos",
