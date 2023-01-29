@@ -13,14 +13,13 @@ export function Header() {
 
     const handleLangChange = (event: SelectChangeEvent) => {
         setLang(event.target.value)
-        console.log(event.target.value)
         setPreferredLanguage(event.target.value)
     }
 
     return (
         <div className="flex w-full dark:bg-slate-900 bg-gray-300 h-16">
             <div className="header-button">
-                <Link to="/">{t("backToIndex").toString()}</Link>
+                <Link to="/" className="w-full h-full flex justify-center items-center">{t("backToIndex").toString()}</Link>
             </div>
             <div className="header-button"
                  onClick={(e) => toggleTheme()}>

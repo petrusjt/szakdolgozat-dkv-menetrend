@@ -2,18 +2,18 @@ import LineGrouping from "../model/line-info/line-grouping";
 
 
 export class LineSelectHelper {
-    private readonly _isCategory: boolean;
+    private readonly _category: string;
     private readonly _value: string;
     private readonly _label: string;
 
-    constructor(isCategory: boolean, value: string, label: string) {
-        this._isCategory = isCategory;
+    constructor(category: string, value: string, label: string) {
+        this._category = category;
         this._value = value;
         this._label = label;
     }
 
-    get isCategory(): boolean {
-        return this._isCategory;
+    get category(): string {
+        return this._category;
     }
 
     get value(): string {
@@ -27,9 +27,9 @@ export class LineSelectHelper {
     public static getLineSelectList(): Array<LineSelectHelper> {
         const linesSelectList: Array<LineSelectHelper> = [];
         [...LineGrouping.entries()].forEach(category => {
-            linesSelectList.push(new LineSelectHelper(true, category[0], ""));
+            //linesSelectList.push(new LineSelectHelper(category[0], category[0], ""));
             [...category[1]].forEach(line =>
-                linesSelectList.push(new LineSelectHelper(false, line[0], line[1].join())));
+                linesSelectList.push(new LineSelectHelper(category[0], line[0], line[1].join())));
         });
         return linesSelectList;
     }

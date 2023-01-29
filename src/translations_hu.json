@@ -1,5 +1,5 @@
 {
-  "backToIndex": "Vissza a Főoldalra",
+  "backToIndex": "Főoldal",
   "theme": "Téma",
   "theme.toggle": "Váltás a világos és sötét téma között",
   "langSelect.language": "Nyelv",
@@ -8,5 +8,8 @@
   "schedule.selector.line": "Járat",
   "schedule.selector.startingPoint": "Felszállási megálló",
   "lineGrouping.tram": "Villamos",
-  "lineGrouping.bus": "Busz"
+  "lineGrouping.trolley": "Trolibusz",
+  "lineGrouping.bus": "Busz",
+  "router.error": "A kérés feldolgozása nem sikerült.",
+  "line.stops": "A %s vonal megállói"
 }

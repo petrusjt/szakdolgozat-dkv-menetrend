@@ -7,6 +7,8 @@ import './i18n';
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
 import {Root} from "src/components/Root";
 import App from "src/App";
+import {CustomError} from "src/components/errors/CustomError";
+import {ScheduleLister} from "src/components/schedule/ScheduleLister";
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -20,8 +22,15 @@ const router = createBrowserRouter([
             {
                 path: "",
                 element: <App />
+            }, {
+                path: "/lines/:lineId",
+                element: <ScheduleLister />
             }
-        ]
+        ],
+        errorElement: <CustomError />
+    }, {
+        path: "/error",
+        element: <CustomError />
     }
 ])
 

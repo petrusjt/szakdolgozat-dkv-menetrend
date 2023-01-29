@@ -28,11 +28,11 @@ export function ScheduleSelector(props: Props) {
                         className="dark:!text-white"
                         onChange={props.handleLineSelect}>
                     {
-                        selectLineList.map(item =>
+                        /*selectLineList.map(item =>
                             item.isCategory
-                                ? <ListSubheader>{item.value}</ListSubheader>
+                                ? <ListSubheader>{t(`lineGrouping.${item.value}`)}</ListSubheader>
                                 : <MenuItem value={item.value}>{item.label}</MenuItem>
-                        )
+                        )*/
                     }
                 </Select>
             </FormControl>

@@ -1,5 +1,5 @@
 {
-  "backToIndex": "Back to Home",
+  "backToIndex": "Homepage",
   "theme": "Theme",
   "theme.toggle": "Toggle light and dark theme",
   "langSelect.language": "Language",
@@ -8,5 +8,8 @@
   "schedule.selector.line": "Line",
   "schedule.selector.startingPoint": "Stop of boarding",
   "lineGrouping.tram": "Tram",
-  "lineGrouping.bus": "Bus"
+  "lineGrouping.trolley": "Trolleybus",
+  "lineGrouping.bus": "Bus",
+  "router.error": "The request couldn't be processed.",
+  "line.stops": "Stops of line %s"
 }

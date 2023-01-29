@@ -8,7 +8,9 @@ export function Root() {
     return (
         <div className="w-screen h-screen bg-gray-200 dark:bg-slate-800 dark:text-white overflow-x-hidden">
             <Header />
-            <Outlet />
+            <div className="p-3">
+                <Outlet />
+            </div>
         </div>
     )
 }
