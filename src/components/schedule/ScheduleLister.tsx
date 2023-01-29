@@ -4,7 +4,6 @@ import {useParams} from "react-router-dom";
 import React, {useState} from "react";
 import {useTranslation} from "react-i18next";
 import {FormControl, InputLabel, MenuItem, Select} from "@mui/material";
-import {baseChangeListener} from "src/util/listener-utils";
 
 /*
 type Props = {
@@ -33,10 +32,10 @@ export function ScheduleLister(props: Props) {
 }*/
 
 export function ScheduleLister() {
-    const [t, i18n] = useTranslation()
+    const [t,] = useTranslation()
     const params = useParams()
     const scheduleInfo = getScheduleForLine(params["lineId"] as string)
-    const [startingPointName, setStartingPointName] = useState(params["startFrom"])
+    const [startingPointName, setStartingPointName] = useState(params["startFrom"] || "")
     const [startingPoint, setStartingPoint] = useState(params["startFrom"]
         ? scheduleInfo.stops.filter(item => item.name === params["startFrom"])[0]
         : scheduleInfo.startsFrom)
@@ -71,7 +70,7 @@ export function ScheduleLister() {
                     {
                         // TODO villamosoknál ez problémás lesz
                         scheduleInfo.stops.map((stop: Stop) =>
-                            <MenuItem value={stop.name}>{stop.name}</MenuItem>)
+                            <MenuItem value={stop.name} key={stop.name}>{stop.name}</MenuItem>)
                     }
                 </Select>
             </FormControl>

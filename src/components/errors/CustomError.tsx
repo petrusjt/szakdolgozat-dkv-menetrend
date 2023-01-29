@@ -3,7 +3,7 @@ import {useTranslation} from "react-i18next";
 
 
 export function CustomError() {
-    const [t, i18n] = useTranslation()
+    const [t, ] = useTranslation()
     return (
         <div className="card">
             <div>{t("router.error").toString()}</div>

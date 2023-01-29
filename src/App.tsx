@@ -1,20 +1,11 @@
-import React, {useState} from 'react';
+import React from 'react';
 import './App.css';
-import { ScheduleLister } from './components/schedule/ScheduleLister';
-import {ScheduleSelector} from "./components/schedule/ScheduleSelector";
-import {baseChangeListener} from "src/util/listener-utils";
-import {Icon, List, ListItem, ListItemButton, ListItemIcon, ListItemText} from "@mui/material";
+import {List, ListItem, ListItemButton, ListItemIcon, ListItemText} from "@mui/material";
 import {DirectionsBusFilled, Tram} from "@mui/icons-material";
 import {LineSelectHelper} from "src/util/line-select-helper";
 import {Link} from "react-router-dom";
 
 function App() {
-    const [selectedLine, setSelectedLine] = useState(0)
-    const [startingPoint, setStartingPoint] = useState("")
-
-    const handleLineSelect = baseChangeListener(setSelectedLine)
-    const handleStartingPointSelect = baseChangeListener(setStartingPoint)
-
     const selectLineList = LineSelectHelper.getLineSelectList()
     return (
         <div className="w-full bg-gray-200 dark:bg-slate-800 p-2
