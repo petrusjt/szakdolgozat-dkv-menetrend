@@ -11,5 +11,6 @@
   "lineGrouping.trolley": "Trolleybus",
   "lineGrouping.bus": "Bus",
   "router.error": "The request couldn't be processed.",
-  "line.stops": "Stops of line %s"
+  "line.stops": "Stops at:",
+  "line.changeDirection": "Schedule for the opposite direction"
 }

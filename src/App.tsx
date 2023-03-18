@@ -13,7 +13,7 @@ function App() {
             <List className="card w-full max-w-full max-h-full">
                 {selectLineList.map(lineSelectHelper =>
                     <ListItem className="!p-0" key={lineSelectHelper.value}>
-                        <Link className="w-full" to={`/lines/${lineSelectHelper.value}`}>
+                        <Link className="w-full" to={`/lines/${lineSelectHelper.value}/normal`}>
                             <ListItemButton>
                                 <ListItemIcon>
                                     {lineSelectHelper.category === 'tram'
@@ -26,13 +26,6 @@ function App() {
                     </ListItem>
                 )}
             </List>
-
-            {/*<ScheduleSelector selectedLine={selectedLine}
-                              handleLineSelect={handleLineSelect}
-                              handleStartingPointSelect={handleStartingPointSelect} />
-            {selectedLine
-                ? <ScheduleLister selectedLine={selectedLine} startingPoint={startingPoint}/>
-                : ""}*/}
         </div>
     );
 }

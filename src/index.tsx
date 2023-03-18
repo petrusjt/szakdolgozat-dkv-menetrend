@@ -23,7 +23,7 @@ const router = createBrowserRouter([
                 path: "",
                 element: <App />
             }, {
-                path: "/lines/:lineId",
+                path: "/lines/:lineId/:reverse",
                 element: <ScheduleLister />
             }
         ],

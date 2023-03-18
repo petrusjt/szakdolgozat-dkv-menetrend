@@ -3,7 +3,7 @@ import {Stop} from "src/model/schedule/stop";
 import {useParams} from "react-router-dom";
 import React, {useState} from "react";
 import {useTranslation} from "react-i18next";
-import {FormControl, InputLabel, MenuItem, Select} from "@mui/material";
+import {FormControl, InputLabel, MenuItem, Select, Tooltip} from "@mui/material";
 import SwapHorizOutlinedIcon from '@mui/icons-material/SwapHorizOutlined';
 import {Schedule} from "src/model/schedule/schedule";
 import {StartTimes} from "src/model/schedule/start-times";
@@ -11,12 +11,13 @@ import {StartTimes} from "src/model/schedule/start-times";
 export function ScheduleLister() {
     const [t,] = useTranslation()
     const params = useParams()
-    const scheduleInfo = getScheduleForLine(params["lineId"] as string)
+    const [isReverse, setReverse] = useState(params["reverse"] === "reverse")
+    const lineId = params["lineId"] as string
+    const [scheduleInfo, setScheduleInfo] = useState(getScheduleForLine(lineId, isReverse))
     const [scheduleAtSelectedStop, setScheduleAtSelectedStop] = useState(scheduleInfo)
-    const [startingPointName, setStartingPointName] = useState(params["startFrom"] || "")
-    const [startingPoint, setStartingPoint] = useState(params["startFrom"]
-        ? scheduleInfo.stops.filter(item => item.name === params["startFrom"])[0]
-        : scheduleInfo.startsFrom)
+    const [startingPointName, setStartingPointName] = useState(scheduleInfo.startsFrom.name)
+    const [startingPoint, setStartingPoint] = useState(scheduleInfo.startsFrom)
+
 
     const handleStartingPointSelect = (event: any) => {
         const stop = scheduleInfo.stops.filter(item => item.name === event.target.value)[0]
@@ -25,10 +26,28 @@ export function ScheduleLister() {
         setScheduleAtSelectedStop(transformScheduleByStartingPoint(scheduleInfo, stop))
     }
 
+    const onReverseClick = (event: any) => {
+        setReverse(prevReverse => {
+            setScheduleInfo(prevScheduleInfo => {
+                const newScheduleInfo = getScheduleForLine(lineId, !prevReverse)
+                setStartingPoint(prevStartingPoint => {
+                    setScheduleAtSelectedStop(
+                        transformScheduleByStartingPoint(newScheduleInfo, newScheduleInfo.startsFrom))
+                    setStartingPointName(newScheduleInfo.startsFrom.name)
+                    return newScheduleInfo.startsFrom
+                })
+                return newScheduleInfo
+            })
+            // @ts-ignore
+            window.history.replaceState(null, null, `/lines/${lineId}/${!prevReverse ? 'reverse' : 'normal'}`)
+            return !prevReverse
+        })
+    }
+
     return (
         <>
-            {/* TODO: kiírni a vonal(ak) nevét és indulás/végállomást (több esetén több sorban?) */}
-            <FormControl className="card w-full" size="small">
+            <div className="w-full flex justify-center font-bold">{lineId} -&nbsp;<span className="uppercase">{scheduleInfo.startsFrom.name} - {scheduleInfo.stops.slice(-1)[0].name}</span></div>
+            <FormControl className="card w-full !mt-3" size="small">
                 <div className="flex w-full gap-1">
                     <div className="w-11/12">
                         <InputLabel id="startingPointSelectLabel" className="mui-color-override">
@@ -55,10 +74,12 @@ export function ScheduleLister() {
                             }
                         </Select>
                     </div>
-                    <div className="w-1/12 flex justify-center items-center dark:bg-slate-700 cursor-pointer rounded-md
-                                    dark:border-gray-300 border-gray-400 border-[1px]">
-                        <SwapHorizOutlinedIcon className="mui-color-override" />
-                    </div>
+                    <Tooltip title={t('line.changeDirection').toString()}>
+                        <div className="w-1/12 flex justify-center items-center dark:bg-slate-700 cursor-pointer rounded-md
+                                    dark:border-gray-300 border-gray-400 border-[1px]" onClick={onReverseClick}>
+                            <SwapHorizOutlinedIcon className="mui-color-override" />
+                        </div>
+                    </Tooltip>
                 </div>
             </FormControl>
             <div className="card w-full mt-2 p-3 rounded-md">
@@ -66,7 +87,7 @@ export function ScheduleLister() {
                 {scheduleInfo.stops.map((item: Stop) =>
                     <div key={item.name} className="flex w-full justify-between">
                         <div className={`${item.name === scheduleInfo.startsFrom.name ? 'underline' : ''}
-                                     ${item.name === startingPoint.name ? 'font-bold' : ''}`}>
+                                         ${item.name === startingPoint.name ? 'font-bold' : ''}`}>
                             {item.name}
                         </div>
                         <div>{item.timeFromStart - startingPoint.timeFromStart}</div>
@@ -75,7 +96,7 @@ export function ScheduleLister() {
             </div>
             <div className="card w-full mt-2 p-3 rounded-md">
                 {scheduleAtSelectedStop.startTimes.map(startTime =>
-                    <div className="w-full border-b-[1px] border-gray-300 mt-2 flex gap-1">
+                    <div key={startTime.hour.toString()} className="w-full border-b-[1px] border-gray-300 mt-2 flex gap-1">
                         <div className="pr-1 border-gray-300 border-r-2">{startTime.hour.toString()}</div>
                         <div className="pl-1 flex justify-start gap-1.5">
                             {startTime.minutes.map(minute =>

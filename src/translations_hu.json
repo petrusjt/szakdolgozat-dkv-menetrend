@@ -11,5 +11,6 @@
   "lineGrouping.trolley": "Trolibusz",
   "lineGrouping.bus": "Busz",
   "router.error": "A kérés feldolgozása nem sikerült.",
-  "line.stops": "A %s vonal megállói"
+  "line.stops": "Megállók:",
+  "line.changeDirection": "Ellenkező irányú menetrend"
 }
