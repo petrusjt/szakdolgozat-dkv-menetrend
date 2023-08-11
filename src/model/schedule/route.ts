@@ -1,6 +1,6 @@
 
 
-export class Line {
+export class Route {
     identifier: string;
 
     constructor(identifier: string) {

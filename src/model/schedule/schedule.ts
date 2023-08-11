@@ -1,4 +1,4 @@
-import {Line} from "./line";
+import {Route} from "./route";
 import {Stop} from "./stop";
 import {StartTimes} from "./start-times";
 
@@ -8,7 +8,7 @@ export class Schedule {
         return this._startTimes;
     }
 
-    get line(): Line {
+    get line(): Route {
         return this._line;
     }
 
@@ -20,12 +20,12 @@ export class Schedule {
         return this._startsFrom;
     }
 
-    private readonly _line: Line;
+    private readonly _line: Route;
     private readonly _stops: Array<Stop>;
     private readonly _startTimes: Array<StartTimes>;
     private readonly _startsFrom: Stop;
 
-    constructor(line: Line, stops: Array<Stop>, startTimes: Array<StartTimes>, startsFrom: Stop) {
+    constructor(line: Route, stops: Array<Stop>, startTimes: Array<StartTimes>, startsFrom: Stop) {
         this._line = line;
         this._stops = stops;
         this._startTimes = startTimes;
