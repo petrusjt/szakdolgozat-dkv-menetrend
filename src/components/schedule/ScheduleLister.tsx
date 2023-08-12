@@ -6,8 +6,6 @@ import {StartTimes} from "src/model/schedule/start-times";
 import {Route} from "src/model/schedule/route";
 import {StartingPointSelector} from "src/components/schedule/subcomponents/StartingPointSelector";
 
-const BASE_REST_PATH = 'http://localhost:8080/thesis-dkv-schedule/api/schedule-input'
-
 export function ScheduleLister() {
     const params = useParams()
     const [isReverse, setReverse] = useState(params["reverse"] === "reverse")
@@ -18,6 +16,8 @@ export function ScheduleLister() {
     const [startingPoint, setStartingPoint] = useState(scheduleInfo.startsFrom)
 
     useEffect(() => {
+        // BASE_REST_PATH comes from public/config.js
+        // @ts-ignore
         fetch(`${BASE_REST_PATH}/${lineId}/${isReverse ? 'REVERSE' : 'NORMAL'}`)
             .then(res => res.json())
             .then(data => {
