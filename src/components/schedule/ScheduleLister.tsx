@@ -2,8 +2,6 @@ import {Stop} from "src/model/schedule/stop";
 import {useParams} from "react-router-dom";
 import React, {useEffect, useState} from "react";
 import {useTranslation} from "react-i18next";
-import {FormControl, InputLabel, MenuItem, Select, Tooltip} from "@mui/material";
-import SwapHorizOutlinedIcon from '@mui/icons-material/SwapHorizOutlined';
 import {Schedule} from "src/model/schedule/schedule";
 import {StartTimes} from "src/model/schedule/start-times";
 import {Route} from "src/model/schedule/route";
