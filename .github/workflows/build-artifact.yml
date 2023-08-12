@@ -16,7 +16,7 @@ jobs:
           node-version: 16
       - run: npm ci
       - run: npm run build
-      - run: mkdir staging && cp target/* staging
+      - run: mkdir staging && cp build/* staging
       - uses: actions/upload-artifact@v3
         with:
           name: Package
