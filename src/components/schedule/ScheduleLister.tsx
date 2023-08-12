@@ -10,7 +10,6 @@ import {StartingPointSelector} from "src/components/schedule/subcomponents/Start
 const BASE_REST_PATH = 'http://localhost:8080/thesis-dkv-schedule/api/schedule-input'
 
 export function ScheduleLister() {
-    const [t,] = useTranslation()
     const params = useParams()
     const [isReverse, setReverse] = useState(params["reverse"] === "reverse")
     const lineId = params["lineId"] as string
