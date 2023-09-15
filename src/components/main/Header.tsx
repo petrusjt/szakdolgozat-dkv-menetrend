@@ -17,11 +17,11 @@ export function Header() {
     }
 
     return (
-        <div className="flex w-full dark:bg-slate-900 bg-gray-300 h-16">
-            <div className="header-button">
+        <div className="flex w-full h-16">
+            <div className="header-button dark:bg-slate-900 bg-gray-300 lg:rounded-l-xl">
                 <Link to="/" className="w-full h-full flex justify-center items-center">{t("backToIndex").toString()}</Link>
             </div>
-            <div className="header-button"
+            <div className="header-button dark:bg-slate-900 bg-gray-300"
                  onClick={(e) => toggleTheme()}>
                 <Tooltip title={t("theme.toggle").toString()}>
                     <IconButton>
@@ -29,7 +29,7 @@ export function Header() {
                     </IconButton>
                 </Tooltip>
             </div>
-            <div className="header-button !border-r-0">
+            <div className="header-button dark:bg-slate-900 bg-gray-300 !border-r-0 lg:rounded-r-xl">
                 <FormControl size="small">
                     <InputLabel id="langSelect-label" className="mui-color-override">
                         {t("langSelect.language").toString()}

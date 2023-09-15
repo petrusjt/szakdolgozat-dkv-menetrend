@@ -46,23 +46,27 @@ export function ScheduleLister() {
             <div className="w-full flex justify-center font-bold">
                 {lineId} -&nbsp;<span className="uppercase">{scheduleInfo.startsFrom.name} - {scheduleInfo.stops.slice(-1)[0].name}</span>
             </div>
-            <StartingPointSelector lineId={params['lineId'] as string}
-                                   stops={scheduleInfo.stops}
-                                   startsFrom={scheduleInfo.startsFrom}
-                                   selectedStop={startingPoint}
-                                   setReverse={setReverse}
-                                   handleStartingPointSelect={handleStartingPointSelect}/>
-            <div className="card w-full mt-2 p-3 rounded-md">
-                {scheduleAtSelectedStop.startTimes.map(startTime =>
-                    <div key={startTime.hour.toString()} className="w-full border-b-[1px] border-gray-300 mt-2 flex gap-1">
-                        <div className="pr-1 border-gray-300 border-r-2">{startTime.hour.toString()}</div>
-                        <div className="pl-1 flex justify-start gap-1.5">
-                            {startTime.minutes.map(minute =>
-                                <span key={minute}>{minute}</span>
-                            )}
+            <div className="lg:flex lg:flex-row lg:gap-2">
+                <div className="w-full">
+                    <StartingPointSelector lineId={params['lineId'] as string}
+                                           stops={scheduleInfo.stops}
+                                           startsFrom={scheduleInfo.startsFrom}
+                                           selectedStop={startingPoint}
+                                           setReverse={setReverse}
+                                           handleStartingPointSelect={handleStartingPointSelect}/>
+                </div>
+                <div className="card w-full mt-2 p-3 rounded-md lg:pt-1">
+                    {scheduleAtSelectedStop.startTimes.map(startTime =>
+                        <div key={startTime.hour.toString()} className="w-full border-b-[1px] border-gray-300 mt-2 flex gap-1">
+                            <div className="pr-1 border-gray-300 border-r-2 w-[2em] text-right">{startTime.hour.toString()}</div>
+                            <div className="pl-1 flex justify-start gap-1.5">
+                                {startTime.minutes.map(minute =>
+                                    <span key={minute}>{minute}</span>
+                                )}
+                            </div>
                         </div>
-                    </div>
-                )}
+                    )}
+                </div>
             </div>
         </>
     )
