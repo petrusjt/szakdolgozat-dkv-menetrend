@@ -7,6 +7,7 @@ import {Route} from "src/model/schedule/route";
 import {StartingPointSelector} from "src/components/schedule/subcomponents/StartingPointSelector";
 import hasReverseDirection from "src/model/line-info/line-direction-info";
 import {useTranslation} from "react-i18next";
+import {getScheduleClassifierFromDate} from "src/util/date-helper";
 
 export type Props = {
     baseRestPath: string
@@ -25,28 +26,25 @@ export function ScheduleLister({baseRestPath}: Props) {
     const [hasReverseDirectionState,] = useState(hasReverseDirection(lineId))
     const [runsToday, setRunsToday] = useState(false)
 
+    const scheduleClassifier = getScheduleClassifierFromDate(new Date())
+
     useEffect(() => {
-        fetch(`${baseRestPath}/${lineId}/${isReverse ? 'REVERSE' : 'NORMAL'}`)
-            .then(res => res.json())
-            .then(data => {
-                setScheduleInfo(prevScheduleInfo => {
-                    const newScheduleInfo = data
-                    if (newScheduleInfo.startTimes.length > 0) {
-                        setStartingPoint(prevStartingPoint => {
-                            setScheduleAtSelectedStop(
-                                transformScheduleByStartingPoint(newScheduleInfo, newScheduleInfo.startsFrom))
-                            return newScheduleInfo.startsFrom
-                        })
-                        setRunsToday(true)
-                    } else {
-                        setRunsToday(false)
-                    }
-                    return newScheduleInfo
+        const cachedData = localStorage.getItem(`${lineId}_${isReverse ? 'REVERSE' : 'NORMAL'}_${scheduleClassifier}`)
+        if (cachedData) {
+            handleFromCacheLoad(JSON.parse(cachedData), lineId, isReverse, setScheduleInfo, setStartingPoint,
+                setScheduleAtSelectedStop, setRunsToday)
+        } else {
+            fetch(`${baseRestPath}/${lineId}/${isReverse ? 'REVERSE' : 'NORMAL'}`)
+                .then(res => res.json())
+                .then(data => {
+                    handleFromCacheLoad(data, lineId, isReverse, setScheduleInfo, setStartingPoint,
+                        setScheduleAtSelectedStop, setRunsToday)
+
+                    localStorage.setItem(`${lineId}_${isReverse ? 'REVERSE' : 'NORMAL'}_${scheduleClassifier}`,
+                        JSON.stringify(data))
                 })
-                // @ts-ignore
-                window.history.replaceState(null, null, `/lines/${lineId}/${isReverse ? 'reverse' : 'normal'}`)
-            })
-    }, [isReverse, lineId, baseRestPath])
+        }
+    }, [isReverse, lineId, baseRestPath, scheduleClassifier])
 
     const handleStartingPointSelect = (event: any) => {
         const stop = scheduleInfo.stops.filter(item => item.timeFromStart === event.target.value)[0]
@@ -88,6 +86,26 @@ export function ScheduleLister({baseRestPath}: Props) {
             </div>
         </>
     )
+}
+
+function handleFromCacheLoad(data: any, lineId: string, isReverse: boolean, setScheduleInfo: any,
+                             setStartingPoint: any, setScheduleAtSelectedStop: any, setRunsToday: any) {
+    setScheduleInfo(() => {
+        const newScheduleInfo = data
+        if (newScheduleInfo.startTimes.length > 0) {
+            setStartingPoint(() => {
+                setScheduleAtSelectedStop(
+                    transformScheduleByStartingPoint(newScheduleInfo, newScheduleInfo.startsFrom))
+                return newScheduleInfo.startsFrom
+            })
+            setRunsToday(true)
+        } else {
+            setRunsToday(false)
+        }
+        return newScheduleInfo
+    })
+    // @ts-ignore
+    window.history.replaceState(null, null, `/lines/${lineId}/${isReverse ? 'reverse' : 'normal'}`)
 }
 
 function transformScheduleByStartingPoint(schedule: Schedule, startingPoint: Stop): Schedule {
