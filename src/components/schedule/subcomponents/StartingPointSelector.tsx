@@ -30,7 +30,7 @@ export function StartingPointSelector({lineId, stops, startsFrom, selectedStop, 
                         </InputLabel>
                         <Select labelId="startingPointSelectLabel"
                                 label={t("schedule.selector.startingPoint").toString()}
-                                value={selectedStop.timeFromStart}
+                                value={selectedStop.name + selectedStop.timeFromStart}
                                 sx={{
                                     color: 'black',
                                     '& .MuiOutlinedInput-notchedOutline': {
@@ -44,7 +44,7 @@ export function StartingPointSelector({lineId, stops, startsFrom, selectedStop, 
                                 onChange={(event) => handleStartingPointSelect(event)}>
                             {
                                 stops.map((stop: Stop) =>
-                                    <MenuItem value={stop.timeFromStart} key={stop.name + stop.timeFromStart}>{stop.name}</MenuItem>)
+                                    <MenuItem value={stop.name + stop.timeFromStart} key={stop.name + stop.timeFromStart}>{stop.name}</MenuItem>)
                             }
                         </Select>
                     </div>
@@ -62,10 +62,10 @@ export function StartingPointSelector({lineId, stops, startsFrom, selectedStop, 
                 <h1 className="font-bold">{t("line.stops").replace("%s", lineId)}</h1>
                 {stops.map((item: Stop) =>
                     <div key={item.name + item.timeFromStart} className="flex w-full justify-between">
-                        <div className={`${item.timeFromStart === startsFrom.timeFromStart ? 'underline' : ''} ${item.timeFromStart === selectedStop.timeFromStart ? 'font-bold' : ''}`}>
+                        <div className={`${item.timeFromStart === startsFrom.timeFromStart && item.name === startsFrom.name ? 'underline' : ''} ${item.timeFromStart === selectedStop.timeFromStart && item.name === selectedStop.name ? 'font-bold' : ''}`}>
                             {item.name}
                         </div>
-                        <div>{item.timeFromStart - startsFrom.timeFromStart}</div>
+                        <div>{item.timeFromStart - selectedStop.timeFromStart}</div>
                     </div>
                 )}
             </div>

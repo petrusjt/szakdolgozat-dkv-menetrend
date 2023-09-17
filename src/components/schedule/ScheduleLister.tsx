@@ -18,7 +18,7 @@ export function ScheduleLister({baseRestPath}: Props) {
     const params = useParams()
     const [isReverse, setReverse] = useState(params["reverse"] === "reverse")
     const lineId = params["lineId"] as string
-    const defaultScheduleInfo = new Schedule(new Route("Error"), [new Stop("Error", 0)], [], new Stop("Error", 0))
+    const defaultScheduleInfo = new Schedule(new Route(lineId), [new Stop("Error", 0)], [], new Stop("Error", 0))
     const [scheduleInfo, setScheduleInfo] = useState(defaultScheduleInfo)
     const [scheduleAtSelectedStop, setScheduleAtSelectedStop] = useState(scheduleInfo)
     const [startingPoint, setStartingPoint] = useState(scheduleInfo.startsFrom)
@@ -33,13 +33,13 @@ export function ScheduleLister({baseRestPath}: Props) {
     useEffect(() => {
         const cachedData = localStorage.getItem(`${lineId}_${isReverse ? 'REVERSE' : 'NORMAL'}_${scheduleClassifier}`)
         if (cachedData) {
-            handleFromCacheLoad(JSON.parse(cachedData), lineId, isReverse, setScheduleInfo, setStartingPoint,
+            handleScheduleLoad(JSON.parse(cachedData), lineId, isReverse, setScheduleInfo, setStartingPoint,
                 setScheduleAtSelectedStop, setRunsToday)
         } else {
             fetch(`${baseRestPath}/${lineId}/${isReverse ? 'REVERSE' : 'NORMAL'}`)
                 .then(res => res.json())
                 .then(data => {
-                    handleFromCacheLoad(data, lineId, isReverse, setScheduleInfo, setStartingPoint,
+                    handleScheduleLoad(data, lineId, isReverse, setScheduleInfo, setStartingPoint,
                         setScheduleAtSelectedStop, setRunsToday)
 
                     localStorage.setItem(`${lineId}_${isReverse ? 'REVERSE' : 'NORMAL'}_${scheduleClassifier}`,
@@ -53,7 +53,7 @@ export function ScheduleLister({baseRestPath}: Props) {
     }, [isReverse, lineId, baseRestPath, scheduleClassifier])
 
     const handleStartingPointSelect = (event: any) => {
-        const stop = scheduleInfo.stops.filter(item => item.timeFromStart === event.target.value)[0]
+        const stop = scheduleInfo.stops.filter(item => item.name + item.timeFromStart === event.target.value)[0]
         setStartingPoint(stop)
         setScheduleAtSelectedStop(transformScheduleByStartingPoint(scheduleInfo, stop))
     }
@@ -98,7 +98,7 @@ export function ScheduleLister({baseRestPath}: Props) {
     )
 }
 
-function handleFromCacheLoad(data: any, lineId: string, isReverse: boolean, setScheduleInfo: any,
+function handleScheduleLoad(data: any, lineId: string, isReverse: boolean, setScheduleInfo: any,
                              setStartingPoint: any, setScheduleAtSelectedStop: any, setRunsToday: any) {
     setScheduleInfo(() => {
         const newScheduleInfo = data
@@ -110,6 +110,7 @@ function handleFromCacheLoad(data: any, lineId: string, isReverse: boolean, setS
             })
             setRunsToday(true)
         } else {
+            setStartingPoint(newScheduleInfo.startsFrom)
             setRunsToday(false)
         }
         return newScheduleInfo
