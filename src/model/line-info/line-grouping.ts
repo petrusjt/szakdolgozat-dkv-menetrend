@@ -9,6 +9,7 @@ const LineGrouping = new Map<string, Map<string, Array<string>>>([
         ['3', ['3']],
         ['4', ['4']],
         ['5', ['5']],
+        ['5A', ['5A']],
     ])],
     ["bus", new Map<string, Array<string>>([
         ['10', ['10']],
