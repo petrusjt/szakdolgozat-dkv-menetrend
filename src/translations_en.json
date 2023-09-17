@@ -14,5 +14,6 @@
   "router.error": "The request couldn't be processed.",
   "line.stops": "Stops at:",
   "line.changeDirection": "Schedule for the opposite direction",
-  "line.notRunningToday": "This line doesn't run today based on the schedule."
+  "line.notRunningToday": "This line doesn't run today based on the schedule.",
+  "trolley": "Trolleybus"
 }

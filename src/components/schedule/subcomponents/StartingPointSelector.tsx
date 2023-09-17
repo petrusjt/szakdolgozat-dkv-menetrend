@@ -17,7 +17,6 @@ interface Props {
 
 export function StartingPointSelector({lineId, stops, startsFrom, selectedStop, setReverse,
                                           handleStartingPointSelect, hasReverseDirection, runsToday}: Props) {
-
     const [t, ] = useTranslation()
 
     return (

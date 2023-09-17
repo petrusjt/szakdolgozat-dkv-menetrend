@@ -4,8 +4,10 @@ import {List, ListItem, ListItemButton, ListItemIcon, ListItemText} from "@mui/m
 import {DirectionsBusFilled, Tram} from "@mui/icons-material";
 import {LineSelectHelper} from "src/util/line-select-helper";
 import {Link} from "react-router-dom";
+import {useTranslation} from "react-i18next";
 
 function App() {
+    const [t, ] = useTranslation()
     const selectLineList = LineSelectHelper.getLineSelectList()
     return (
         <div className="w-full bg-gray-200 dark:bg-slate-800 p-2
@@ -20,7 +22,7 @@ function App() {
                                         ? <Tram className="mui-color-override" />
                                         : <DirectionsBusFilled className="mui-color-override" />}
                                 </ListItemIcon>
-                                <ListItemText primary={lineSelectHelper.label} />
+                                <ListItemText primary={lineSelectHelper.label + (lineSelectHelper.category === 'trolley' ? ` - ${t('trolley').toString()}` : '')} />
                             </ListItemButton>
                         </Link>
                     </ListItem>

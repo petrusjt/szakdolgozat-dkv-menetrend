@@ -14,5 +14,6 @@
   "router.error": "A kérés feldolgozása nem sikerült.",
   "line.stops": "Megállók:",
   "line.changeDirection": "Ellenkező irányú menetrend",
-  "line.notRunningToday": "Ez a járat a mai napon menetrend szerint nem közlekedik."
+  "line.notRunningToday": "Ez a járat a mai napon menetrend szerint nem közlekedik.",
+  "trolley": "Trolibusz"
 }
