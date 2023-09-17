@@ -46,7 +46,7 @@ export function ScheduleLister({baseRestPath}: Props) {
                 // @ts-ignore
                 window.history.replaceState(null, null, `/lines/${lineId}/${isReverse ? 'reverse' : 'normal'}`)
             })
-    }, [isReverse, lineId])
+    }, [isReverse, lineId, baseRestPath])
 
     const handleStartingPointSelect = (event: any) => {
         const stop = scheduleInfo.stops.filter(item => item.timeFromStart === event.target.value)[0]
