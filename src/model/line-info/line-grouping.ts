@@ -1,16 +1,16 @@
 
 
-const LineGrouping = new Map([
-    ["tram", new Map([
+const LineGrouping = new Map<string, Map<string, Array<string>>>([
+    ["tram", new Map<string, Array<string>>([
         ['1', ['1']],
         ['2', ['2']],
     ])],
-    ["trolley", new Map([
+    ["trolley", new Map<string, Array<string>>([
         ['3', ['3']],
         ['4', ['4']],
         ['5', ['5']],
     ])],
-    ["bus", new Map([
+    ["bus", new Map<string, Array<string>>([
         ['10', ['10']],
         ['10A', ['10A']],
         ['10Y', ['10Y']],

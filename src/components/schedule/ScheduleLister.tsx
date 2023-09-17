@@ -5,6 +5,7 @@ import {Schedule} from "src/model/schedule/schedule";
 import {StartTimes} from "src/model/schedule/start-times";
 import {Route} from "src/model/schedule/route";
 import {StartingPointSelector} from "src/components/schedule/subcomponents/StartingPointSelector";
+import hasReverseDirection from "src/model/line-info/line-direction-info";
 
 export function ScheduleLister() {
     const params = useParams()
@@ -14,6 +15,8 @@ export function ScheduleLister() {
     const [scheduleInfo, setScheduleInfo] = useState(defaultScheduleInfo)
     const [scheduleAtSelectedStop, setScheduleAtSelectedStop] = useState(scheduleInfo)
     const [startingPoint, setStartingPoint] = useState(scheduleInfo.startsFrom)
+
+    const [hasReverseDirectionState,] = useState(hasReverseDirection(lineId))
 
     useEffect(() => {
         // BASE_REST_PATH comes from public/config.js
@@ -53,7 +56,8 @@ export function ScheduleLister() {
                                            startsFrom={scheduleInfo.startsFrom}
                                            selectedStop={startingPoint}
                                            setReverse={setReverse}
-                                           handleStartingPointSelect={handleStartingPointSelect}/>
+                                           handleStartingPointSelect={handleStartingPointSelect}
+                                           hasReverseDirection={hasReverseDirectionState}/>
                 </div>
                 <div className="card w-full mt-2 p-3 rounded-md md:pt-1">
                     {scheduleAtSelectedStop.startTimes.map(startTime =>

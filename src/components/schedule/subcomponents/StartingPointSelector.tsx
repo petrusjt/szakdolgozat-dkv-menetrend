@@ -10,10 +10,12 @@ interface Props {
     startsFrom: Stop,
     selectedStop: Stop
     setReverse: Function,
-    handleStartingPointSelect: Function
+    handleStartingPointSelect: Function,
+    hasReverseDirection: boolean
 }
 
-export function StartingPointSelector({lineId, stops, startsFrom, selectedStop, setReverse, handleStartingPointSelect}: Props) {
+export function StartingPointSelector({lineId, stops, startsFrom, selectedStop, setReverse,
+                                          handleStartingPointSelect, hasReverseDirection}: Props) {
 
     const [t, ] = useTranslation()
 
@@ -21,7 +23,7 @@ export function StartingPointSelector({lineId, stops, startsFrom, selectedStop, 
         <>
             <FormControl className="card w-full !mt-3" size="small">
                 <div className="flex w-full gap-1">
-                    <div className="w-11/12">
+                    <div className={hasReverseDirection ? "w-11/12" : 'w-full'}>
                         <InputLabel id="startingPointSelectLabel" className="mui-color-override">
                             {t("schedule.selector.startingPoint").toString()}
                         </InputLabel>
@@ -45,12 +47,14 @@ export function StartingPointSelector({lineId, stops, startsFrom, selectedStop, 
                             }
                         </Select>
                     </div>
-                    <Tooltip title={t('line.changeDirection').toString()}>
-                        <div className="w-1/12 flex justify-center items-center dark:bg-slate-700 cursor-pointer rounded-md
-                                    dark:border-gray-300 border-gray-400 border-[1px]" onClick={(event) => setReverse((prev: boolean) => !prev)}>
-                            <SwapHorizOutlinedIcon className="mui-color-override" />
-                        </div>
-                    </Tooltip>
+                    {hasReverseDirection &&
+                        <Tooltip title={t('line.changeDirection').toString()}>
+                            <div className="w-1/12 flex justify-center items-center dark:bg-slate-700 cursor-pointer rounded-md
+                                        dark:border-gray-300 border-gray-400 border-[1px]"
+                                 onClick={(event) => setReverse((prev: boolean) => !prev)}>
+                                <SwapHorizOutlinedIcon className="mui-color-override"/>
+                            </div>
+                        </Tooltip>}
                 </div>
             </FormControl>
             <div className="card w-full mt-2 p-3 rounded-md">

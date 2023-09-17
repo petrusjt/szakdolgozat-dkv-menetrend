@@ -27,7 +27,6 @@ export class LineSelectHelper {
     public static getLineSelectList(): Array<LineSelectHelper> {
         const linesSelectList: Array<LineSelectHelper> = [];
         [...LineGrouping.entries()].forEach(category => {
-            //linesSelectList.push(new LineSelectHelper(category[0], category[0], ""));
             [...category[1]].forEach(line =>
                 linesSelectList.push(new LineSelectHelper(category[0], line[0], line[1].join())));
         });
