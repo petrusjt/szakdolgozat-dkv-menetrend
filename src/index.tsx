@@ -14,6 +14,10 @@ const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 
+// BASE_REST_PATH comes from public/config.js
+// @ts-ignore
+const baseRestPath: string = BASE_REST_PATH
+
 const router = createBrowserRouter([
     {
         path: "/",
@@ -24,7 +28,7 @@ const router = createBrowserRouter([
                 element: <App />
             }, {
                 path: "/lines/:lineId/:reverse",
-                element: <ScheduleLister />
+                element: <ScheduleLister baseRestPath={baseRestPath} />
             }
         ],
         errorElement: <CustomError />

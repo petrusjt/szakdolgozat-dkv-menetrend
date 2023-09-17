@@ -8,7 +8,7 @@ import {useState} from "react";
 
 export function Header() {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const { t, i18n } = useTranslation()
+    const {t,} = useTranslation()
     const [lang, setLang] = useState(getPreferredLanguage())
 
     const handleLangChange = (event: SelectChangeEvent) => {

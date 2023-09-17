@@ -6,11 +6,12 @@
   "langSelect.hungarian": "Magyar",
   "langSelect.english": "English",
   "schedule.selector.line": "Járat",
-  "schedule.selector.startingPoint": "Felszállási megálló",
+  "schedule.selector.startingPoint": "Felszállásra használni kívánt megállóhely",
   "lineGrouping.tram": "Villamos",
   "lineGrouping.trolley": "Trolibusz",
   "lineGrouping.bus": "Busz",
   "router.error": "A kérés feldolgozása nem sikerült.",
   "line.stops": "Megállók:",
-  "line.changeDirection": "Ellenkező irányú menetrend"
+  "line.changeDirection": "Ellenkező irányú menetrend",
+  "line.notRunningToday": "Ez a járat a mai napon menetrend szerint nem közlekedik."
 }

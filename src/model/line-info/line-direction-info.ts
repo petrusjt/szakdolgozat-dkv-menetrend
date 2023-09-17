@@ -19,8 +19,7 @@ const LINES_WITHOUT_REVERSE_DIRECTION: Array<string> = [
     '91Y',
     '92',
     '93',
-    '94',
-    'A1'
+    '94'
 ]
 
 export default function hasReverseDirection(lineId: string) : boolean {

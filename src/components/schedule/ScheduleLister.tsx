@@ -6,8 +6,14 @@ import {StartTimes} from "src/model/schedule/start-times";
 import {Route} from "src/model/schedule/route";
 import {StartingPointSelector} from "src/components/schedule/subcomponents/StartingPointSelector";
 import hasReverseDirection from "src/model/line-info/line-direction-info";
+import {useTranslation} from "react-i18next";
 
-export function ScheduleLister() {
+export type Props = {
+    baseRestPath: string
+}
+export function ScheduleLister({baseRestPath}: Props) {
+    const {t,} = useTranslation()
+
     const params = useParams()
     const [isReverse, setReverse] = useState(params["reverse"] === "reverse")
     const lineId = params["lineId"] as string
@@ -17,20 +23,24 @@ export function ScheduleLister() {
     const [startingPoint, setStartingPoint] = useState(scheduleInfo.startsFrom)
 
     const [hasReverseDirectionState,] = useState(hasReverseDirection(lineId))
+    const [runsToday, setRunsToday] = useState(false)
 
     useEffect(() => {
-        // BASE_REST_PATH comes from public/config.js
-        // @ts-ignore
-        fetch(`${BASE_REST_PATH}/${lineId}/${isReverse ? 'REVERSE' : 'NORMAL'}`)
+        fetch(`${baseRestPath}/${lineId}/${isReverse ? 'REVERSE' : 'NORMAL'}`)
             .then(res => res.json())
             .then(data => {
                 setScheduleInfo(prevScheduleInfo => {
                     const newScheduleInfo = data
-                    setStartingPoint(prevStartingPoint => {
-                        setScheduleAtSelectedStop(
-                            transformScheduleByStartingPoint(newScheduleInfo, newScheduleInfo.startsFrom))
-                        return newScheduleInfo.startsFrom
-                    })
+                    if (newScheduleInfo.startTimes.length > 0) {
+                        setStartingPoint(prevStartingPoint => {
+                            setScheduleAtSelectedStop(
+                                transformScheduleByStartingPoint(newScheduleInfo, newScheduleInfo.startsFrom))
+                            return newScheduleInfo.startsFrom
+                        })
+                        setRunsToday(true)
+                    } else {
+                        setRunsToday(false)
+                    }
                     return newScheduleInfo
                 })
                 // @ts-ignore
@@ -57,19 +67,23 @@ export function ScheduleLister() {
                                            selectedStop={startingPoint}
                                            setReverse={setReverse}
                                            handleStartingPointSelect={handleStartingPointSelect}
-                                           hasReverseDirection={hasReverseDirectionState}/>
+                                           hasReverseDirection={hasReverseDirectionState}
+                                           runsToday={runsToday}/>
                 </div>
                 <div className="card w-full mt-2 p-3 rounded-md md:pt-1">
-                    {scheduleAtSelectedStop.startTimes.map(startTime =>
-                        <div key={startTime.hour.toString()} className="w-full border-b-[1px] border-gray-300 mt-2 flex gap-1">
-                            <div className="pr-1 border-gray-300 border-r-2 w-[2em] text-right">{startTime.hour.toString()}</div>
-                            <div className="pl-1 flex justify-start gap-1.5">
-                                {startTime.minutes.map(minute =>
-                                    <span key={minute}>{minute}</span>
-                                )}
-                            </div>
-                        </div>
-                    )}
+                    {runsToday
+                        ? scheduleAtSelectedStop.startTimes.map(startTime =>
+                            <div key={startTime.hour.toString()} className="w-full border-b-[1px] border-gray-300 mt-2 flex gap-1">
+                                <div className="pr-1 border-gray-300 border-r-2 w-[2em] text-right">{startTime.hour.toString()}</div>
+                                <div className="pl-1 flex justify-start gap-1.5">
+                                    {startTime.minutes.map(minute =>
+                                        <span key={minute}>{minute}</span>
+                                    )}
+                                </div>
+                            </div>)
+                        : <div className="w-full h-full flex justify-center items-center font-bold">
+                            <span className="w-fit">{t('line.notRunningToday').toString()}</span>
+                        </div>}
                 </div>
             </div>
         </>

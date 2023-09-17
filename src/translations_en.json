@@ -6,11 +6,12 @@
   "langSelect.hungarian": "Magyar",
   "langSelect.english": "English",
   "schedule.selector.line": "Line",
-  "schedule.selector.startingPoint": "Stop of boarding",
+  "schedule.selector.startingPoint": "Stop to be used for getting on",
   "lineGrouping.tram": "Tram",
   "lineGrouping.trolley": "Trolleybus",
   "lineGrouping.bus": "Bus",
   "router.error": "The request couldn't be processed.",
   "line.stops": "Stops at:",
-  "line.changeDirection": "Schedule for the opposite direction"
+  "line.changeDirection": "Schedule for the opposite direction",
+  "line.notRunningToday": "This line doesn't run today based on the schedule."
 }

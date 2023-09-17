@@ -11,17 +11,18 @@ interface Props {
     selectedStop: Stop
     setReverse: Function,
     handleStartingPointSelect: Function,
-    hasReverseDirection: boolean
+    hasReverseDirection: boolean,
+    runsToday: boolean
 }
 
 export function StartingPointSelector({lineId, stops, startsFrom, selectedStop, setReverse,
-                                          handleStartingPointSelect, hasReverseDirection}: Props) {
+                                          handleStartingPointSelect, hasReverseDirection, runsToday}: Props) {
 
     const [t, ] = useTranslation()
 
     return (
         <>
-            <FormControl className="card w-full !mt-3" size="small">
+            <FormControl className="card w-full !mt-3" size="small" disabled={!runsToday}>
                 <div className="flex w-full gap-1">
                     <div className={hasReverseDirection ? "w-11/12" : 'w-full'}>
                         <InputLabel id="startingPointSelectLabel" className="mui-color-override">
