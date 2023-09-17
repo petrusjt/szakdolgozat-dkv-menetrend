@@ -18,7 +18,7 @@ export function Header() {
 
     return (
         <div className="flex w-full h-16">
-            <div className="header-button dark:bg-slate-900 bg-gray-300 lg:rounded-l-xl">
+            <div className="header-button dark:bg-slate-900 bg-gray-300 md:rounded-l-xl">
                 <Link to="/" className="w-full h-full flex justify-center items-center">{t("backToIndex").toString()}</Link>
             </div>
             <div className="header-button dark:bg-slate-900 bg-gray-300"
@@ -29,7 +29,7 @@ export function Header() {
                     </IconButton>
                 </Tooltip>
             </div>
-            <div className="header-button dark:bg-slate-900 bg-gray-300 !border-r-0 lg:rounded-r-xl">
+            <div className="header-button dark:bg-slate-900 bg-gray-300 !border-r-0 md:rounded-r-xl">
                 <FormControl size="small">
                     <InputLabel id="langSelect-label" className="mui-color-override">
                         {t("langSelect.language").toString()}

@@ -46,7 +46,7 @@ export function ScheduleLister() {
             <div className="w-full flex justify-center font-bold">
                 {lineId} -&nbsp;<span className="uppercase">{scheduleInfo.startsFrom.name} - {scheduleInfo.stops.slice(-1)[0].name}</span>
             </div>
-            <div className="lg:flex lg:flex-row lg:gap-2">
+            <div className="md:flex md:flex-row md:gap-2">
                 <div className="w-full">
                     <StartingPointSelector lineId={params['lineId'] as string}
                                            stops={scheduleInfo.stops}
@@ -55,7 +55,7 @@ export function ScheduleLister() {
                                            setReverse={setReverse}
                                            handleStartingPointSelect={handleStartingPointSelect}/>
                 </div>
-                <div className="card w-full mt-2 p-3 rounded-md lg:pt-1">
+                <div className="card w-full mt-2 p-3 rounded-md md:pt-1">
                     {scheduleAtSelectedStop.startTimes.map(startTime =>
                         <div key={startTime.hour.toString()} className="w-full border-b-[1px] border-gray-300 mt-2 flex gap-1">
                             <div className="pr-1 border-gray-300 border-r-2 w-[2em] text-right">{startTime.hour.toString()}</div>

@@ -8,13 +8,13 @@ export function Root() {
     return (
         <div className="w-screen h-screen bg-gray-200 dark:bg-slate-800 dark:text-white overflow-x-hidden">
             <div className="w-full h-full flex flex-col">
-                <div className="w-full lg:flex lg:justify-center">
-                    <div className="lg:w-2/3 lg:px-2.5 lg:min-w-[400px] lg:max-w-[1000px]">
+                <div className="w-full md:flex md:justify-center">
+                    <div className="w-full lg:w-2/3 md:px-2.5 md:min-w-[400px] md:max-w-[1000px]">
                         <Header />
                     </div>
                 </div>
-                <div className="w-full lg:flex lg:justify-center">
-                    <div className="p-3 lg:w-2/3 lg:min-w-[400px] lg:max-w-[1000px]">
+                <div className="w-full md:flex md:justify-center">
+                    <div className="p-3 w-full lg:w-2/3 md:min-w-[400px] md:max-w-[1000px]">
                         <Outlet />
                     </div>
                 </div>
