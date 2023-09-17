@@ -44,7 +44,7 @@ export function StartingPointSelector({lineId, stops, startsFrom, selectedStop, 
                                 onChange={(event) => handleStartingPointSelect(event)}>
                             {
                                 stops.map((stop: Stop) =>
-                                    <MenuItem value={stop.timeFromStart} key={stop.timeFromStart}>{stop.name}</MenuItem>)
+                                    <MenuItem value={stop.timeFromStart} key={stop.name + stop.timeFromStart}>{stop.name}</MenuItem>)
                             }
                         </Select>
                     </div>
@@ -61,7 +61,7 @@ export function StartingPointSelector({lineId, stops, startsFrom, selectedStop, 
             <div className="card w-full mt-2 p-3 rounded-md">
                 <h1 className="font-bold">{t("line.stops").replace("%s", lineId)}</h1>
                 {stops.map((item: Stop) =>
-                    <div key={item.timeFromStart} className="flex w-full justify-between">
+                    <div key={item.name + item.timeFromStart} className="flex w-full justify-between">
                         <div className={`${item.timeFromStart === startsFrom.timeFromStart ? 'underline' : ''} ${item.timeFromStart === selectedStop.timeFromStart ? 'font-bold' : ''}`}>
                             {item.name}
                         </div>
