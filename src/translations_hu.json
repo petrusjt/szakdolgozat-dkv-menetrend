@@ -7,6 +7,7 @@
   "langSelect.english": "English",
   "schedule.selector.line": "Járat",
   "schedule.selector.startingPoint": "Felszállásra használni kívánt megállóhely",
+  "schedule.dataNotAvailable": "Ehhez a járathoz vagy nem áll rendelkezésre menetrend információ, vagy az még nem került letöltésre. Kérjük, próbálja újra internetre csatlakozva!",
   "lineGrouping.tram": "Villamos",
   "lineGrouping.trolley": "Trolibusz",
   "lineGrouping.bus": "Busz",

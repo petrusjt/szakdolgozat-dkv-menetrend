@@ -26,6 +26,8 @@ export function ScheduleLister({baseRestPath}: Props) {
     const [hasReverseDirectionState,] = useState(hasReverseDirection(lineId))
     const [runsToday, setRunsToday] = useState(false)
 
+    const [isErrorState, setErrorState] = useState(false)
+
     const scheduleClassifier = getScheduleClassifierFromDate(new Date())
 
     useEffect(() => {
@@ -42,6 +44,10 @@ export function ScheduleLister({baseRestPath}: Props) {
 
                     localStorage.setItem(`${lineId}_${isReverse ? 'REVERSE' : 'NORMAL'}_${scheduleClassifier}`,
                         JSON.stringify(data))
+                    setErrorState(false)
+                })
+                .catch(() => {
+                    setErrorState(true)
                 })
         }
     }, [isReverse, lineId, baseRestPath, scheduleClassifier])
@@ -54,36 +60,40 @@ export function ScheduleLister({baseRestPath}: Props) {
 
     return (
         <>
-            <div className="w-full flex justify-center font-bold">
-                {lineId} -&nbsp;<span className="uppercase">{scheduleInfo.startsFrom.name} - {scheduleInfo.stops.slice(-1)[0].name}</span>
-            </div>
-            <div className="md:flex md:flex-row md:gap-2">
-                <div className="w-full">
-                    <StartingPointSelector lineId={params['lineId'] as string}
-                                           stops={scheduleInfo.stops}
-                                           startsFrom={scheduleInfo.startsFrom}
-                                           selectedStop={startingPoint}
-                                           setReverse={setReverse}
-                                           handleStartingPointSelect={handleStartingPointSelect}
-                                           hasReverseDirection={hasReverseDirectionState}
-                                           runsToday={runsToday}/>
-                </div>
-                <div className="card w-full mt-2 p-3 rounded-md md:pt-1">
-                    {runsToday
-                        ? scheduleAtSelectedStop.startTimes.map(startTime =>
-                            <div key={startTime.hour.toString()} className="w-full border-b-[1px] border-gray-300 mt-2 flex gap-1">
-                                <div className="pr-1 border-gray-300 border-r-2 w-[2em] text-right">{startTime.hour.toString()}</div>
-                                <div className="pl-1 flex justify-start gap-1.5">
-                                    {startTime.minutes.map(minute =>
-                                        <span key={minute}>{minute}</span>
-                                    )}
-                                </div>
-                            </div>)
-                        : <div className="w-full h-full flex justify-center items-center font-bold">
-                            <span className="w-fit">{t('line.notRunningToday').toString()}</span>
-                        </div>}
-                </div>
-            </div>
+            {isErrorState
+                ? <div className="w-full card font-bold">{t('schedule.dataNotAvailable').toString()}</div>
+                : <div className="w-full">
+                    <div className="w-full flex justify-center font-bold">
+                        {lineId} -&nbsp;<span className="uppercase">{scheduleInfo.startsFrom.name} - {scheduleInfo.stops.slice(-1)[0].name}</span>
+                    </div>
+                    <div className="md:flex md:flex-row md:gap-2">
+                        <div className="w-full">
+                            <StartingPointSelector lineId={params['lineId'] as string}
+                                                   stops={scheduleInfo.stops}
+                                                   startsFrom={scheduleInfo.startsFrom}
+                                                   selectedStop={startingPoint}
+                                                   setReverse={setReverse}
+                                                   handleStartingPointSelect={handleStartingPointSelect}
+                                                   hasReverseDirection={hasReverseDirectionState}
+                                                   runsToday={runsToday}/>
+                        </div>
+                        <div className="card w-full mt-2 p-3 rounded-md md:pt-1">
+                            {runsToday
+                                ? scheduleAtSelectedStop.startTimes.map(startTime =>
+                                    <div key={startTime.hour.toString()} className="w-full border-b-[1px] border-gray-300 mt-2 flex gap-1">
+                                        <div className="pr-1 border-gray-300 border-r-2 w-[2em] text-right">{startTime.hour.toString()}</div>
+                                        <div className="pl-1 flex justify-start gap-1.5">
+                                            {startTime.minutes.map(minute =>
+                                                <span key={minute}>{minute}</span>
+                                            )}
+                                        </div>
+                                    </div>)
+                                : <div className="w-full h-full flex justify-center items-center font-bold">
+                                    <span className="w-fit">{t('line.notRunningToday').toString()}</span>
+                                </div>}
+                        </div>
+                    </div>
+                </div>}
         </>
     )
 }
