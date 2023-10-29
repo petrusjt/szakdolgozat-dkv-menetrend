@@ -1,4 +1,5 @@
 {
+  "loading": "Loading...",
   "backToIndex": "Homepage",
   "theme": "Theme",
   "theme.toggle": "Toggle light and dark theme",

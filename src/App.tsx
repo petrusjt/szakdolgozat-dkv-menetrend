@@ -1,5 +1,4 @@
 import React from 'react';
-import './App.css';
 import {List, ListItem, ListItemButton, ListItemIcon, ListItemText} from "@mui/material";
 import {DirectionsBusFilled, Tram} from "@mui/icons-material";
 import {LineSelectHelper} from "src/util/line-select-helper";
